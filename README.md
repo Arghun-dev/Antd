@@ -1,6 +1,6 @@
 # Antd
 
-### Tip 1
+### Change Locale
 
 To change the `locale` of the Antd:
 
@@ -15,6 +15,14 @@ import 'moment/locale/fa';
 
 // ============Localization of Antd============
 moment.locale('fa');
+
+constructor(props) {
+    super(props);
+
+    this.state = {
+      locale: fa_IR,
+    }
+  }
 
 render() {
     const { locale } = this.state;
@@ -37,4 +45,23 @@ render() {
       </div>
     );
   }
+```
+
+### Change Direction
+
+Exactly same local. just add this
+
+```js
+constructor(props) {
+    super(props);
+
+    this.state = {
+      locale: fa_IR,
+      direction: 'rtl'
+    }
+  }
+  
+  render() {
+    <ConfigProvider locale={locale} direction={direction}>
+  } 
 ```
