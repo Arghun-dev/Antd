@@ -65,3 +65,137 @@ constructor(props) {
     <ConfigProvider locale={locale} direction={direction}>
   } 
 ```
+
+### Using Form (beautiful layout)
+
+**always give this style to have beautiful layout in your page**
+imagine you have a `Row` with two `columns`
+
+```js
+
+const formItemLayout = {
+    wrapperCol: {
+      span: 14
+    }
+  }
+
+
+<Form
+      style={{ width: '100%' }}
+      name="validate_other"
+      {...formItemLayout}
+      // onFinish={onFinish}
+      initialValues={{
+        'input-number': 3,
+        'checkbox-group': ['A', 'B'],
+        rate: 3.5
+      }}
+    >
+      <div className={classes.mainRowDiv}>
+        <Row className={classes.firstRow}>
+          <Col xs={24} md={12}>
+            <Form.Item
+              className={classes.formItem}
+              name="productName"
+              label="نام کالا"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: 'لطفا نام کالا را وارد کن!'
+                }
+              ]}
+            >
+              <Input
+                type="text"
+                placeholder="نام کالا"
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
+              />
+            </Form.Item>
+            <Form.Item
+              className={classes.formItem}
+              name="productLatinName"
+              label="نام لاتین کالا"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: 'لطفا نام لاتین کالا را وارد کن!'
+                }
+              ]}
+            >
+              <Input
+                type="text"
+                placeholder="نام لاتین کالا"
+                value={productLatinName}
+                onChange={(e) => setProductLatinName(e.target.value)}
+              />
+            </Form.Item>
+            </Col>
+            <Col md={12} xs={24}>
+                <Form.Item
+                  className={classes.formItem}
+                  name="productCategory"
+                  label="طبقه بندی"
+                  hasFeedback
+                  rules={[
+                    {
+                      required: true,
+                      message: 'لطفا طبقه بندی کالا را انتخاب کنید!'
+                    }
+                  ]}
+                >
+                  <Select
+                    showSearch
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.children
+                        .toLowerCase()
+                        .indexOf(input.toLowerCase()) >= 0
+                    }
+                    placeholder="طبقه بندی کالا"
+                    value={productCategoryId}
+                    onChange={(val) => setProductCategoryId(val)}
+                  >
+                    {productCategories.map((productCategory) => (
+                      <Option value={productCategory.categoryId}>
+                        {productCategory.categoryName}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  className={classes.formItem}
+                  name="genericCode"
+                  label="کد ژنریک"
+                  hasFeedback
+                >
+                  <Input.Search
+                    enterButton
+                    type="text"
+                    value={genericCode}
+                    onChange={(e) => setGenericCode(e.target.value)}
+                    placeholder="کد ژنریک"
+                    loading={genericCodeSearchLoading}
+                    onSearch={() => {
+                      setGenericCodeSearchLoading(true)
+                      setTimeout(() => {
+                        genericCodes.map((item) => {
+                          if (item.genericCode === genericCode) {
+                            setGenericCodeFound(true)
+                            setShowGenericCodeList(false)
+                          } else if (item.genericCode !== genericCode) {
+                            setShowGenericCodeList(true)
+                            setGenericCodeFound(false)
+                          }
+                        })
+                        setGenericCodeSearchLoading(false)
+                      }, 2000)
+                    }}
+                  />
+                </Form.Item>
+            </Col>
+           </Row>
+          </div>
+```
