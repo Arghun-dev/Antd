@@ -199,3 +199,16 @@ const formItemLayout = {
            </Row>
           </div>
 ```
+
+**styles**
+
+```js
+mainRowDiv: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+formItem: {
+    display: 'flex',
+    justifyContent: 'flex-end'
+}
+```
