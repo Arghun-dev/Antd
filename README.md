@@ -212,3 +212,15 @@ formItem: {
     justifyContent: 'flex-end'
 }
 ```
+
+
+### making antd dropdown select scroll section fixed not moveable
+
+**just add this line to `Select`**
+
+```js
+<Select
+    getPopupContainer={(trigger) => trigger.parentNode}
+>
+</Select>
+```
