@@ -224,3 +224,42 @@ formItem: {
 >
 </Select>
 ```
+
+### Clear form fields of antd after submitting the form
+
+**In a function component, you can very easily get access to the form using the Form.useForm hook. The value returned by this hook should be passed as the form property of the Form component. Then you can just call resetFields on the form in whatever callback you want to clear the form. This example will clear the form when it is submitted**
+
+```js
+import React from 'react';
+import { Button, Form, Input } from 'antd';
+
+export default function MyFormComponent() {
+  const [form] = Form.useForm();
+
+  const submitForm = ({ name, favoriteColor }) => {
+    console.log(name, favoriteColor);
+    form.resetFields();
+  };
+
+  return (
+    <Form
+      form={form}
+      labelCol={{ span: 6 }}
+      wrapperCol={{ span: 12 }}
+      onFinish={submitForm}
+    >
+      <Form.Item name="name" label="What is your name?">
+        <Input />
+      </Form.Item>
+      <Form.Item name="favoriteColor" label="What is your favorite color?">
+        <Input />
+      </Form.Item>
+      <Form.Item wrapperCol={{ offset: 6, span: 12 }}>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
+  );
+}
+```
